@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 // Simula um banco de dados em memória
 const db = {
@@ -9,13 +9,13 @@ class UserService {
   // Cria um novo usuário com validações
   createUser(nome, email, idade, isAdmin = false) {
     if (!nome || !email || !idade) {
-      throw new Error('Nome, email e idade são obrigatórios.');
+      throw new Error("Nome, email e idade são obrigatórios.");
     }
     if (idade < 18) {
-      throw new Error('O usuário deve ser maior de idade.');
+      throw new Error("O usuário deve ser maior de idade.");
     }
 
-    const id = crypto.randomBytes(16).toString('hex');
+    const id = crypto.randomBytes(16).toString("hex");
     const newUser = {
       id,
       nome,
@@ -23,7 +23,7 @@ class UserService {
       idade,
       isAdmin,
       createdAt: new Date(),
-      status: 'ativo',
+      status: "ativo",
     };
     db.users[id] = newUser;
     return newUser;
@@ -44,7 +44,7 @@ class UserService {
       // Regra de negócio: admins não podem ser desativados
       return false;
     }
-    user.status = 'inativo';
+    user.status = "inativo";
     return true;
   }
 
@@ -52,9 +52,9 @@ class UserService {
   // O formato do relatório pode mudar no futuro
   generateUserReport() {
     const users = Object.values(db.users);
-    let report = '--- Relatório de Usuários ---\n';
+    let report = "--- Relatório de Usuários ---\n";
     if (users.length === 0) {
-      report += 'Nenhum usuário cadastrado.';
+      report += "Nenhum usuário cadastrado.";
       return report;
     }
     for (const user of users) {
